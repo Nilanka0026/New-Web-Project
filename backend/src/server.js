@@ -1,18 +1,29 @@
 import express from "express"
-import testRoutes from "./routes/testRoutes.js"
 import { connectDB } from "./config/db.js";
+
+import testRoutes from "./routes/testRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
+import itemRoutes from "./routes/itemRoutes.js"
+import cartRoutes from "./routes/cartRoutes.js"
 
 const app = express()
 
-connectDB();
+
 
 app.use(express.json());
 
-app.use("/api/notes", testRoutes); //middelware
+app.use("/api/notes", testRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/items", itemRoutes);
+app.use("/api/carts", cartRoutes); //middelware
 
-app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000")
-})
+connectDB().then(() => {
+  app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+  });
+});
+
+
 
 
 
