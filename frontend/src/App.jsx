@@ -1,22 +1,23 @@
-import {Route, Routes} from "react-router"
-
-import HomePage from "./Pages/HomePage"
-import CreatePage from "./Pages/CreatePage"
-import NoteDetailPage from "./Pages/NoteDetailPage"
+import { Route, Routes } from "react-router";
+import HomePage from "./Pages/HomePage";
+import CreatePage from "./Pages/CreatePage";
+import NoteDetailPage from "./Pages/NoteDetailPage";
+import LoginPage from "./Pages/LoginPage"; // <-- import login page
 
 const App = () => {
   return (
     <div>
-      <button className = "btn btn-primary">click</button>
-<Routes>
-    <Route path="/" element={<HomePage />} />
-    <Route path="/create" element={<CreatePage />} />
-    <Route path="/note/:id" element={<NoteDetailPage />} />
+      <Routes>
+        {/* Public / Auth routes */}
+        <Route path="/login" element={<LoginPage />} />
 
-</Routes>
-
+        {/* Main app routes */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/create" element={<CreatePage />} />
+        <Route path="/note/:id" element={<NoteDetailPage />} />
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
 export default App
