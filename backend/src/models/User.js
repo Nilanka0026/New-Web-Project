@@ -18,6 +18,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",                               // normal user by default
+    },
+    cart: [
+        {
+            productId: {
+                type: mongoose.Schema.Types.ObjectId, // refers to your product
+                ref: "Item"
+            },
+            quantity: {
+                type: Number,
+                default: 1
+            }
+        }
+    ]
   },
   {
     timestamps: true,

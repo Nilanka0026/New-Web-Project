@@ -4,6 +4,12 @@ import CreatePage from "./Pages/CreatePage";
 import NoteDetailPage from "./Pages/NoteDetailPage";
 import LoginPage from "./Pages/LoginPage"; // <-- import login page
 import SignupPage from "./Pages/SignupPage"; // <-- import signup page
+import ItemDetailPage from "./Pages/ItemDetails";
+import Profile from "./Pages/Profile"; // <-- import profile page
+import AdminDashboardPage from "./Pages/adminDashboard";
+import ProfilePage from "./Pages/Profile";
+import CartPage from "./Pages/Cart";
+
 
 const App = () => {
   return (
@@ -17,6 +23,11 @@ const App = () => {
         <Route path="/create" element={<CreatePage />} />
         <Route path="/note/:id" element={<NoteDetailPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/item/:id" element={<ItemDetailPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="/cart" element={<CartPage />} />
+
       </Routes>
     </div>
   );
