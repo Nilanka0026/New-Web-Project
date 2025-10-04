@@ -1,9 +1,14 @@
 import User from "../models/user.js";
 
-// Check if the user is admin using email or ID
+// Check if the user is admin
 export async function isAdmin(req, res, next) {
   try {
-    const { userId, email } = req.body; // expect either userId or email in request
+    // For GET requests, get email from headers
+    const email = req.headers.email || req.body.email;
+    const userId = req.body.userId;
+
+    if (!email && !userId) return res.status(401).json({ message: "Admin identification required" });
+
     const user = await User.findOne({ $or: [{ _id: userId }, { email }] });
 
     if (!user) return res.status(404).json({ message: "User not found" });

@@ -4,32 +4,61 @@ import Item from "../models/item.js";
 // Get all users
 export async function getAllUsers(req, res) {
   try {
-    const users = await User.find().select("-password"); // exclude password
+    const users = await User.find();
     res.status(200).json(users);
   } catch (err) {
-    console.error("Error fetching users:", err);
+    console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
 }
 
-// Add a new item
+// Get all items
+export async function getAllItems(req, res) {
+  try {
+    const items = await Item.find();
+    res.status(200).json(items);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+}
+
+// Add new item
 export async function addItem(req, res) {
   try {
-    const { name, brand, price, description, stock, imageUrl } = req.body;
+    const { name, brand, price, description, stock, imageUrl, email } = req.body;
 
-    const newItem = new Item({
-      name,
-      brand,
-      price,
-      description,
-      stock,
-      imageUrl,
-    });
-
+    // Admin check should already be done in middleware
+    const newItem = new Item({ name, brand, price, description, stock, imageUrl });
     await newItem.save();
-    res.status(201).json({ message: "Item added successfully", item: newItem });
+
+    res.status(201).json({ message: "Item added successfully" });
   } catch (err) {
-    console.error("Error adding item:", err);
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+}
+
+// Delete user
+export async function deleteUser(req, res) {
+  try {
+    const { userId } = req.params;
+    await User.findByIdAndDelete(userId);
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+}
+
+// Delete item
+export async function deleteItem(req, res) {
+  try {
+    const { itemId } = req.params;
+    await Item.findByIdAndDelete(itemId);
+    res.status(200).json({ message: "Item deleted successfully" });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
 }

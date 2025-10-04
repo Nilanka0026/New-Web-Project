@@ -9,6 +9,8 @@ import Profile from "./Pages/Profile"; // <-- import profile page
 import AdminDashboardPage from "./Pages/adminDashboard";
 import ProfilePage from "./Pages/Profile";
 import CartPage from "./Pages/Cart";
+import AboutPage from "./Pages/About"; 
+import ContactPage from "./Pages/Contactus";
 
 
 const App = () => {
@@ -27,6 +29,8 @@ const App = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
 
       </Routes>
     </div>
